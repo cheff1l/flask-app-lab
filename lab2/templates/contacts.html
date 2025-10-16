@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section id="contact-info" class="mb-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Контактна інформація</h3>
+                <ul class="list-group">
+                    <li class="list-group-item"><i class="bi bi-envelope"></i> Email: example@example.com</li>
+                    <li class="list-group-item"><i class="bi bi-telephone"></i> Телефон: +380 12 345 6789</li>
+                    <li class="list-group-item"><i class="bi bi-geo-alt"></i> Адреса: м. Івано-Франківськ, Україна</li>
+                    <li class="list-group-item"><i class="bi bi-linkedin"></i> LinkedIn: linkedin.com/in/username</li>
+                    <li class="list-group-item"><i class="bi bi-github"></i> GitHub: github.com/username</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h3>Зворотній зв'язок</h3>
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Ім'я</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Тема</label>
+                        <input type="text" class="form-control" id="subject">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Повідомлення</label>
+                        <textarea class="form-control" id="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Надіслати</button>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}
