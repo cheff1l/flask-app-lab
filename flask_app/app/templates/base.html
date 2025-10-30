@@ -11,9 +11,20 @@
     {% include 'includes/nav.html' %}
 
     <div class="container mt-4">
-        <h1>{{ title }}</h1>
-        {% block content %}{% endblock %}
-    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show mt-3" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <h1>{{ title }}</h1>
+    {% block content %}{% endblock %}
+</div>
 
     {% include 'includes/footer.html' %}
 

@@ -92,3 +92,50 @@ nav a:hover {
         grid-template-columns: 1fr;
     }
 }
+/* Стилі для темної теми */
+.bg-dark {
+    background-color: #222 !important;
+}
+
+.bg-secondary {
+    background-color: #333 !important;
+}
+
+/* Додаткові стилі для профілю */
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.table {
+    margin-top: 15px;
+}
+
+/* Стилі для flash-повідомлень */
+.alert {
+    margin-bottom: 15px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    color: #856404;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    color: #0c5460;
+}
