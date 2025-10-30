@@ -1,10 +1,9 @@
 from flask import render_template, request, redirect, url_for, flash, session, make_response
 from . import users_bp
+from ..forms import LoginForm
 from functools import wraps
 from datetime import datetime, timedelta
 
-
-# Функція-декоратор для перевірки авторизації
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -16,7 +15,6 @@ def login_required(f):
     return decorated_function
 
 
-# Маршрути, які ми мали раніше
 @users_bp.route('/hi/<string:name>')
 def greetings(name):
     name = name.upper()
@@ -30,30 +28,32 @@ def admin():
     print(to_url)
     return redirect(to_url)
 
-
-# Нові маршрути
 @users_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+    form = LoginForm()
 
-        # Прості заглушки для автентифікації (в реальному проекті використовуйте базу даних)
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        remember = form.remember.data
+
         if username == 'admin' and password == 'password':
             session['username'] = username
-            flash('Ви успішно увійшли в систему!', 'success')
+
+            remember_msg = "з опцією 'Запам'ятати мене'" if remember else "без опції 'Запам'ятати мене'"
+            flash(f'Ви успішно увійшли в систему {remember_msg}!', 'success')
+
             return redirect(url_for('users.profile'))
         else:
             flash('Неправильне ім\'я користувача або пароль!', 'danger')
-            return redirect(url_for('users.login'))
 
-    return render_template('users/login.html')
+    return render_template('users/login.html', title='Вхід', form=form)
 
 
 @users_bp.route('/profile')
 @login_required
 def profile():
-    return render_template('users/profile.html')
+    return render_template('users/profile.html', title='Профіль')
 
 
 @users_bp.route('/logout')
@@ -114,7 +114,6 @@ def delete_all_cookies():
     response = make_response(redirect(url_for('users.profile')))
 
     for key in request.cookies.keys():
-        # Не видаляємо кукі сесії Flask
         if key != 'session':
             response.delete_cookie(key)
 

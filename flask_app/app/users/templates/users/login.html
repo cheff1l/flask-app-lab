@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% from 'macros/form_macros.html' import render_field %}
 
 {% block title %}Вхід{% endblock %}
 
@@ -10,16 +11,20 @@
                 <h2 class="text-center">Вхід</h2>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ url_for('users.login') }}">
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Ім'я користувача</label>
-                        <input type="text" class="form-control" id="username" name="username" required>
+                <form method="POST" action="{{ url_for('users.login') }}" novalidate>
+                    {{ form.csrf_token }}
+
+                    {{ render_field(form.username) }}
+                    {{ render_field(form.password) }}
+
+                    <div class="mb-3 form-check">
+                        {{ form.remember(class="form-check-input") }}
+                        {{ form.remember.label(class="form-check-label") }}
                     </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Пароль</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+
+                    <div class="text-center">
+                        {{ form.submit(class="btn btn-primary w-100") }}
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Увійти</button>
                 </form>
             </div>
         </div>
