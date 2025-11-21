@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <img src="{{ url_for('static', filename='images/photo.jpg') }}" class="img-fluid rounded" alt="Моє фото">
+        </div>
+        <div class="col-md-8">
+            <section id="about" class="mb-4">
+                <h2>Про себе</h2>
+                <p>Я веб-розробник із досвідом створення сайтів за допомогою сучасних технологій. Маю сильні навички в розробці бекенду та фронтенду.</p>
+            </section>
+        </div>
+    </div>
+    
+    <section id="education" class="mb-4">
+        <h2>Освіта</h2>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Прикарпатський національний університет імені Василя Стефаника</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Бакалавр, Комп'ютерні науки</h6>
+                <p class="card-text">2021 - 2025</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="skills" class="mb-4">
+        <h2>Навички</h2>
+        <ul class="list-group">
+            <li class="list-group-item">Розробка веб-сайтів</li>
+            <li class="list-group-item">Адаптивний дизайн</li>
+            <li class="list-group-item">Бекенд розробка</li>
+            <li class="list-group-item">Робота з базами даних</li>
+        </ul>
+    </section>
+    
+    <section id="technologies" class="mb-4">
+        <h2>Технології</h2>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Фронтенд</h5>
+                        <p class="card-text">HTML, CSS, JavaScript, Bootstrap</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Бекенд</h5>
+                        <p class="card-text">Python, Flask, Django</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Бази даних</h5>
+                        <p class="card-text">SQL, SQLite, PostgreSQL</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="experience" class="mb-4">
+        <h2>Досвід роботи / Проекти</h2>
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Веб-сайт для місцевого бізнесу</h5>
+                <h6 class="card-subtitle mb-2 text-muted">2024</h6>
+                <p class="card-text">Створення сайту-візитівки з використанням Flask та Bootstrap.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Блог на Django</h5>
+                <h6 class="card-subtitle mb-2 text-muted">2023</h6>
+                <p class="card-text">Розробка блогу з можливістю додавання, редагування та видалення статей.</p>
+            </div>
+        </div>
+    </section>
+{% endblock %}

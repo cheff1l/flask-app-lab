@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h2>Список продуктів</h2>
+    <ul>
+        {% for i in range(1, 6) %}
+            <li>
+                <a href="{{ url_for('products.product_detail', product_id=i) }}">
+                    Продукт {{ i }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
