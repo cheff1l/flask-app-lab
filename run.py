@@ -1,13 +1,13 @@
 from app import create_app, db
 from app.posts.models import Post
+from app.products.models import Product, Category
 
 app = create_app('development')
 
 
 @app.shell_context_processor
 def make_shell_context():
-    """Додає змінні в Flask shell"""
-    return dict(db=db, Post=Post)
+    return dict(db=db, Post=Post, Product=Product, Category=Category)
 
 
 if __name__ == "__main__":

@@ -1,21 +1,18 @@
-from flask import render_template, request
-from . import products_bp
+from flask import render_template
+from app.products import products_bp
+from app.products.models import Product
+from app import db
+from sqlalchemy import select
 
 
 @products_bp.route('/')
 def index():
-    return render_template("products/index.html", title="Продукти")
+    stmt = select(Product).order_by(Product.id)
+    products = db.session.execute(stmt).scalars().all()
+    return render_template('products/index.html', products=products, title="Продукти")
 
 
 @products_bp.route('/<int:product_id>')
 def product_detail(product_id):
-    product = {
-        'id': product_id,
-        'name': f'Продукт {product_id}',
-        'price': product_id * 10.5,
-        'description': f'Опис продукту {product_id}'
-    }
-
-    return render_template("products/detail.html",
-                           title=f"Продукт {product_id}",
-                           product=product)
+    product = db.get_or_404(Product, product_id)
+    return render_template('products/detail.html', product=product, title=product.name)
