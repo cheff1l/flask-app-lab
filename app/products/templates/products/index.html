@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h2>Список продуктів</h2>
+
+<div class="row mt-4">
+    {% for product in products %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">
+                    <strong>Ціна:</strong> ${{ product.price }}<br>
+                    <strong>Активний:</strong> {% if product.active %}Так{% else %}Ні{% endif %}<br>
+                    {% if product.category %}
+                    <strong>Категорія:</strong> {{ product.category.name }}<br>
+                    {% endif %}
+                    <strong>Створено:</strong> {{ product.created_at.strftime('%Y-%m-%d %H:%M') if product.created_at else 'N/A' }}
+                </p>
+                <a href="{{ url_for('products.product_detail', product_id=product.id) }}" class="btn btn-sm btn-primary">Деталі</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
