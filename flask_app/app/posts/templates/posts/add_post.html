@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% from "macros/form_macros.html" import render_field %}
+
+{% block title %}{{ title if title else 'Create a New Post' }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>{{ title if title else 'Create a New Post' }}</h2>
+    
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        
+        {{ render_field(form.title) }}
+        {{ render_field(form.content) }}
+        
+        <div class="mb-3 form-check">
+            {{ form.is_active(class="form-check-input") }}
+            {{ form.is_active.label(class="form-check-label") }}
+        </div>
+        
+        {{ render_field(form.publish_date) }}
+        {{ render_field(form.category) }}
+        {{ render_field(form.author_id) }}
+        {{ render_field(form.tags) }}
+        
+        {{ form.submit(class="btn btn-primary") }}
+    </form>
+    
+    <a href="{{ url_for('.all_posts') }}" class="btn btn-secondary mt-3">Return to Posts</a>
+</div>
+{% endblock %}

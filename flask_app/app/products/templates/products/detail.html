@@ -3,8 +3,41 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-    <h2>{{ product.name }}</h2>
-    <p><strong>Ціна:</strong> {{ product.price }} грн</p>
-    <p><strong>Опис:</strong> {{ product.description }}</p>
-    <a href="{{ url_for('products.index') }}">Назад до списку</a>
+<div class="card">
+    <div class="card-header">
+        <h3>{{ product.name }}</h3>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <td>{{ product.id }}</td>
+            </tr>
+            <tr>
+                <th>Назва</th>
+                <td>{{ product.name }}</td>
+            </tr>
+            <tr>
+                <th>Ціна</th>
+                <td>${{ product.price }}</td>
+            </tr>
+            <tr>
+                <th>Активний</th>
+                <td>{% if product.active %}Так{% else %}Ні{% endif %}</td>
+            </tr>
+            {% if product.category %}
+            <tr>
+                <th>Категорія</th>
+                <td>{{ product.category.name }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <th>Дата створення</th>
+                <td>{{ product.created_at.strftime('%Y-%m-%d %H:%M:%S') if product.created_at else 'N/A' }}</td>
+            </tr>
+        </table>
+        
+        <a href="{{ url_for('products.index') }}" class="btn btn-secondary">Назад до списку</a>
+    </div>
+</div>
 {% endblock %}

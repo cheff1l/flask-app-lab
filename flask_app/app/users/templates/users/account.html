@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Account{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Welcome, {{ user.username }}!</h3>
+                </div>
+                <div class="card-body">
+                    <p>You have successfully logged in to your profile.</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    
+                    <a href="{{ url_for('users.logout') }}" class="btn btn-danger mt-3">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

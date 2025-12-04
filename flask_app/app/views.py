@@ -1,24 +1,23 @@
-import os
-import logging
+from flask import Blueprint, render_template, redirect, url_for, flash
 from loguru import logger
-from flask import render_template, request, redirect, url_for, flash, session
-from . import app
 from .forms import ContactForm
 
 logger.add("app/logs/contacts.log", rotation="500 KB", level="INFO")
 
+main_bp = Blueprint('main', __name__)
 
-@app.route('/')
-def main():
+
+@main_bp.route('/')
+def home():
     return render_template("base.html", title="Головна")
 
 
-@app.route('/resume')
+@main_bp.route('/resume')
 def resume():
     return render_template("resume.html", title="Резюме")
 
 
-@app.route('/contacts', methods=['GET', 'POST'])
+@main_bp.route('/contacts', methods=['GET', 'POST'])
 def contacts():
     form = ContactForm()
 
@@ -34,6 +33,6 @@ def contacts():
 
         flash(f"Дякуємо, {name}! Ваше повідомлення з email {email} було успішно відправлено.", 'success')
 
-        return redirect(url_for('contacts'))
+        return redirect(url_for('main.contacts'))
 
     return render_template('contacts.html', title='Контакти', form=form)
