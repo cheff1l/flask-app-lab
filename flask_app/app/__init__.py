@@ -46,6 +46,9 @@ def create_app(config_name=None):
     from .users import users_bp
     from .products import products_bp
     from .posts import posts_bp
+    from app.laptops import laptops_bp
+
+    app.register_blueprint(laptops_bp, url_prefix='/laptops')
 
     app.register_blueprint(main_bp)
     app.register_blueprint(users_bp)
