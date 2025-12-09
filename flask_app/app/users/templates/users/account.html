@@ -1,20 +1,94 @@
 {% extends "base.html" %}
 
-{% block title %}Account{% endblock %}
-
 {% block content %}
 <div class="container mt-5">
-    <div class="row justify-content-center">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <img src="{{ image_file }}" alt="Profile Picture" class="rounded-circle mb-3" width="128" height="128">
+                    <h4>{{ current_user.username }}</h4>
+                    <p class="text-muted">{{ current_user.email }}</p>
+                    {% if current_user.last_seen %}
+                    <p class="text-muted small">Last seen: {{ current_user.last_seen.strftime('%Y-%m-%d %H:%M') }}</p>
+                    {% endif %}
+                    {% if current_user.about_me %}
+                    <hr>
+                    <p>{{ current_user.about_me }}</p>
+                    {% endif %}
+                    <hr>
+                    <a href="{{ url_for('users.change_password') }}" class="btn btn-warning btn-sm mb-2">Change Password</a>
+                    <a href="{{ url_for('users.logout') }}" class="btn btn-danger btn-sm">Logout</a>
+                </div>
+            </div>
+        </div>
+
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h3>Welcome, {{ user.username }}!</h3>
+                    <h5>Account Info</h5>
                 </div>
                 <div class="card-body">
-                    <p>You have successfully logged in to your profile.</p>
-                    <p><strong>Email:</strong> {{ user.email }}</p>
-                    
-                    <a href="{{ url_for('users.logout') }}" class="btn btn-danger mt-3">Logout</a>
+                    <form method="POST" enctype="multipart/form-data" novalidate>
+                        {{ form.hidden_tag() }}
+
+                        <div class="mb-3">
+                            {{ form.username.label(class="form-label") }}
+                            {% if form.username.errors %}
+                                {{ form.username(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.username.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.username(class="form-control") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.email.label(class="form-label") }}
+                            {% if form.email.errors %}
+                                {{ form.email(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.email.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.email(class="form-control") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.about_me.label(class="form-label") }}
+                            {% if form.about_me.errors %}
+                                {{ form.about_me(class="form-control is-invalid", rows="3") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.about_me.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.about_me(class="form-control", rows="3") }}
+                            {% endif %}
+                            <small class="form-text text-muted">Maximum 140 characters</small>
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.picture.label(class="form-label") }}
+                            {{ form.picture(class="form-control") }}
+                            {% if form.picture.errors %}
+                                {% for error in form.picture.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.submit(class="btn btn-primary") }}
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
